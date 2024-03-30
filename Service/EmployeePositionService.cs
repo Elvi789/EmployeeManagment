@@ -4,13 +4,12 @@ using static EmployeeManagment.Service.EmployeePositionService;
 
 namespace EmployeeManagment.Service
 {
-    public class EmployeePositionService
-    {
-        public class employeePositionService : IEmployeePositionService
+   
+        public class EmployeePositionService : IEmployeePositionService
         {
             public readonly EmployeePositionRepository _employeePositionRepository;
 
-            public employeePositionService(EmployeePositionRepository employeePositionRepository)
+            public EmployeePositionService(EmployeePositionRepository employeePositionRepository)
             {
                 _employeePositionRepository = employeePositionRepository;
             }
@@ -40,5 +39,4 @@ namespace EmployeeManagment.Service
             }
         }
     }
-}
 

@@ -23,6 +23,9 @@ builder.Services.AddTransient<IEmployeeServices, EmployeeService>();
 builder.Services.AddScoped<PositionRepository>();
 builder.Services.AddTransient<IPositionService, PositionService>();
 
+builder.Services.AddScoped<EmployeePositionRepository>();
+builder.Services.AddTransient<IEmployeePositionService, EmployeePositionService>();
+
 
 var serviceProvider = builder.Services.BuildServiceProvider();
 var logger = serviceProvider.GetService<ILogger<ApplicationUser>>();

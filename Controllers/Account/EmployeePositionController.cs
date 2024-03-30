@@ -8,25 +8,29 @@ namespace EmployeeManagment.Controllers.Account
     public class EmployeePositionController : Controller
     {
         public readonly IEmployeePositionService _employeepositionService;
-        public readonly IEmployeePositionService _employeepositionsService;
+        public readonly IPositionService _positionService;
 
-        public EmployeePositionController(IEmployeePositionService employeepositionService)
+        public EmployeePositionController(IEmployeePositionService employeepositionService, IPositionService positionService)
         {
             _employeepositionService = employeepositionService;
-            _employeepositionsService = _employeepositionsService;
+            _positionService = positionService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int eId)
         {
             
-            var employeepositions = _employeepositionService.GetAllEmployeesPosition(); 
+            var employeepositions = (await _employeepositionService.GetAllEmployeesPosition()).Where(x => x.EmployeeId == eId);
+
+            ViewBag.EmployeeId = eId;
             return View(employeepositions); 
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(int eId)
         {
-            var model = new EmployeePositionForCreationDto(); 
+            var model = new EmployeePositionForCreationDto();
+            model.Positions = _positionService.GetAllPosition();
+            model.EmployeeId = eId;
             return View(model); 
         }
         [HttpPost]
